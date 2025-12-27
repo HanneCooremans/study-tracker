@@ -1,0 +1,29 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+env/
+venv/
+
+# Settings (gevoelige data)
+settings.ini
+.env
+
+# Database (reële database niet committen)
+*.db
+*.sqlite
+*.sqlite3
+
+# Output bestanden
+output/
+*.csv
+*.xlsx
+
+# IDEs
+.spyderproject
+.spyproject
+.vscode/
+.idea/
