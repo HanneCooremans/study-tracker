@@ -12,10 +12,9 @@ venv/
 settings.ini
 .env
 
-# Database (reële database niet committen)
-*.db
-*.sqlite
-*.sqlite3
+# Database (runtime database niet committen)
+data/study_tracker.db
+
 
 # Output bestanden
 output/
