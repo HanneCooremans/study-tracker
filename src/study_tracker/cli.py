@@ -134,6 +134,8 @@ def run_cli(conn: sqlite3.Connection):
         print("5) List study sessions")
         print("6) Update study session")
         print("7) Report: total minutes per course")
+        print("8) Export report to CSV")
+        print("9) Export report to Excel")
         print("0) Exit")
 
         choice = prompt("Choose: ")
@@ -152,6 +154,12 @@ def run_cli(conn: sqlite3.Connection):
             update_session_flow(session_service)
         elif choice == "7":
             report_minutes_per_course_flow(report_service)
+        elif choice == "8":
+            report_service.export_csv("output/report.csv")
+            print("CSV exported to output/report.csv")
+        elif choice == "9":
+            report_service.export_excel("output/report.xlsx")
+            print("Excel exported to output/report.xlsx")
         elif choice == "0":
             break
         else:
