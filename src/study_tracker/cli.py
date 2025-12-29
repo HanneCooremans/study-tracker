@@ -4,6 +4,7 @@ from .models.course import Course
 from .models.session import StudySession
 from .services.course_service import CourseService
 from .services.session_service import SessionService
+from .services.report_service import ReportService
 
 
 def prompt(text: str) -> str:
@@ -120,6 +121,8 @@ def update_session_flow(session_service: SessionService):
 def run_cli(conn: sqlite3.Connection):
     course_service = CourseService(conn)
     session_service = SessionService(conn)
+    report_service = ReportService(conn)
+
 
     while True:
         print()
@@ -130,6 +133,7 @@ def run_cli(conn: sqlite3.Connection):
         print("4) Add study session")
         print("5) List study sessions")
         print("6) Update study session")
+        print("7) Report: total minutes per course")
         print("0) Exit")
 
         choice = prompt("Choose: ")
@@ -146,7 +150,18 @@ def run_cli(conn: sqlite3.Connection):
             list_sessions_flow(session_service)
         elif choice == "6":
             update_session_flow(session_service)
+        elif choice == "7":
+            report_minutes_per_course_flow(report_service)
         elif choice == "0":
             break
         else:
             print("Unknown option.")
+            
+def report_minutes_per_course_flow(report_service: ReportService):
+    rows = report_service.total_minutes_per_course()
+    if not rows:
+        print("No data found.")
+        return
+    for name, minutes in rows:
+        print(f"{name}: {minutes} minutes")
+
